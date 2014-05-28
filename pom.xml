@@ -43,9 +43,13 @@
   </scm>
   <developers>
     <developer>
-    <developer>
       <id>lbandou</id>
-      <name>Lues Bandou</name>
+      <name>Lyes Bandou</name>
+      <organization>XWiki SAS</organization>
+    </developer>
+    <developer>
+      <id>Sidali</id>
+      <name>Sidali Djebloun</name>
       <organization>XWiki SAS</organization>
     </developer>
   </developers>
