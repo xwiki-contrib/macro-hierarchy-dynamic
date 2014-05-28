@@ -23,7 +23,7 @@
   <web>XWiki</web>
   <name>HierarchyMacroTranslations</name>
   <language/>
-  <defaultLanguage>en</defaultLanguage>
+  <defaultLanguage></defaultLanguage>
   <translation>0</translation>
   <parent>XWiki.HierarchyMacro</parent>
   <creator>xwiki:XWiki.Admin</creator>
