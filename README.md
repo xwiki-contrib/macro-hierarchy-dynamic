@@ -1,4 +1,4 @@
-Macro dynamic tree
-=================
+Dynamic Tree Macro
+==================
 
-Hierarchy Macro use jQuery and jsTree (http://www.jstree.com) to display dynamique tree view of wiki documents based on parent/child relationships
+A hierarchy Macro using jQuery and jsTree (http://www.jstree.com) to display dynamic tree view of wiki documents based on parent/child relationships.
