@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
  * See the NOTICE file distributed with this work for additional
  * information regarding copyright ownership.
@@ -20,8 +21,8 @@
 -->
 
 <xwikidoc>
-  <web>XWiki</web>
-  <name>HierarchyMacro</name>
+  <web>Macros</web>
+  <name>DynamicHierarchyMacro</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
@@ -34,13 +35,13 @@
   <date>1400160816000</date>
   <contentUpdateDate>1400160558000</contentUpdateDate>
   <version>1.1</version>
-  <title>Hierarchy Macro</title>
+  <title>Dynamic Hierarchy Macro</title>
   <defaultTemplate/>
   <validationScript/>
   <comment/>
   <minorEdit>false</minorEdit>
-  <syntaxId>xwiki/2.0</syntaxId>
-  <hidden>false</hidden>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
   <attachment>
     <filename>32px.png</filename>
     <filesize>3121</filesize>
@@ -1835,7 +1836,7 @@ YVsUCTAZExEAOw==
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </use>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>0</number>
     <className>XWiki.JavaScriptExtension</className>
     <guid>c9e0eab2-85bb-40ea-9a36-a0a931041200</guid>
@@ -1854,14 +1855,14 @@ YVsUCTAZExEAOw==
     }
 });
 require(['jQueryNoConflict', 'jstree'], function($, jstree) {
-    var xwikiHierarchy = xwikiHierarchy || {};
-    xwikiHierarchy = function() {
+    var dynamicXWikiHierarchy = dynamicXWikiHierarchy || {};
+    dynamicXWikiHierarchy = function() {
         var that = this;
         this.childrenIcon = "$xwiki.getSkinFile('icons/silk/page_white.png')";
         this.init = function(element) {
             console.log("Initializing tree...");
             console.log(resultPage);
-            var roots_node_url = "$xwiki.getURL('XWiki.HierarchyMacroJson', 'view', 'xpage=plain')&amp;" + stringParams
+            var roots_node_url = "$xwiki.getURL('Macros.DynamicHierarchyMacroJson', 'view', 'xpage=plain')&amp;" + stringParams
             if(resultPage!=""){
                 roots_node_url = resultPage + "&amp;" + stringParams
             }
@@ -1911,8 +1912,8 @@ require(['jQueryNoConflict', 'jstree'], function($, jstree) {
             });
         }
     };
-    var xwikiHierarchy = new xwikiHierarchy();
-    xwikiHierarchy.init("#tree");
+    var dynamicXWikiHierarchy = new dynamicXWikiHierarchy();
+    dynamicXWikiHierarchy.init("#tree");
 });</code>
     </property>
     <property>
@@ -1956,7 +1957,7 @@ require(['jQueryNoConflict', 'jstree'], function($, jstree) {
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </level>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>0</number>
     <className>XWiki.RequiredRightClass</className>
     <guid>60a57b04-7b37-4b77-9455-d7ee6038af4a</guid>
@@ -2036,7 +2037,7 @@ require(['jQueryNoConflict', 'jstree'], function($, jstree) {
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </use>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>0</number>
     <className>XWiki.StyleSheetExtension</className>
     <guid>50281939-7a8e-417b-bff4-6ee5970ef75e</guid>
@@ -3081,7 +3082,7 @@ require(['jQueryNoConflict', 'jstree'], function($, jstree) {
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </visibility>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>0</number>
     <className>XWiki.WikiMacroClass</className>
     <guid>ec7106f1-8dee-4288-812b-4676f587d2a7</guid>
@@ -3105,8 +3106,8 @@ var showcheckboxes = $!xcontext.macro.params.showcheckboxes ;
 var checkboxname = "$!xcontext.macro.params.checkboxname";
 &lt;/script&gt;
 {{/html}}
-$xwiki.ssx.use('XWiki.HierarchyMacro')
-$xwiki.jsx.use("XWiki.HierarchyMacro")
+$xwiki.ssx.use('Macros.DynamicHierarchyMacro')
+$xwiki.jsx.use('Macros.DynamicHierarchyMacro')
 {{/velocity}}
 
 {{html}}
@@ -3126,10 +3127,10 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
       <description>Displays the pages in the wiki / space in the parent/child tree, editable. Note that you can only use one editable hierarchy macro per page.</description>
     </property>
     <property>
-      <id>hierarchy</id>
+      <id>dynamicHierarchy</id>
     </property>
     <property>
-      <name>Hierarchy </name>
+      <name>Dynamic Hierarchy </name>
     </property>
     <property>
       <supportsInlineMode>0</supportsInlineMode>
@@ -3187,7 +3188,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>0</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>92b0e158-7da3-4132-a8bf-e1372ee1c13c</guid>
@@ -3253,7 +3254,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>1</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>26d39c77-c9c6-492c-823f-f2b757b83b2c</guid>
@@ -3319,7 +3320,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>2</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>d57b2ca0-6a8d-456e-9cba-204eb5f762db</guid>
@@ -3385,7 +3386,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>3</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>509a5b9f-252d-47c6-8641-aa637571097e</guid>
@@ -3451,7 +3452,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>4</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>43d06e9c-d51d-4a52-8904-81477bd4fb60</guid>
@@ -3517,7 +3518,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>5</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>50d5256f-c063-411a-b261-c30024612578</guid>
@@ -3583,7 +3584,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>6</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>580076ae-04a3-4b74-98ce-4a3cef437735</guid>
@@ -3649,7 +3650,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>7</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>703dc30c-4d63-4f5a-b9b9-4a73d956e4c4</guid>
@@ -3715,7 +3716,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>8</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>0aa8d740-52a4-48ef-bd44-3769d595ab08</guid>
@@ -3781,7 +3782,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>9</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>1845543b-38d9-4ea8-96c4-adad9c1ea30f</guid>
@@ -3847,7 +3848,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>10</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>83e72dc9-eedb-4b20-8850-1ae1ed61ea54</guid>
@@ -3913,7 +3914,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>11</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>fcdbfdaf-4396-42b4-8ddd-781a006ed0d5</guid>
@@ -3979,7 +3980,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>12</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>17d05af7-7d5e-4d65-ae6d-0d4ec6ad984c</guid>
@@ -4045,7 +4046,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>XMacros.DynamicHierarchyMacro</name>
     <number>13</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>a8625edc-a6fa-4d50-a96f-cfc98892d676</guid>
@@ -4111,7 +4112,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>14</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>cbb458e2-88be-45e4-ab07-0127999f8183</guid>
@@ -4177,7 +4178,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>15</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>73706e9c-b37e-4ab0-8d56-a3ff214babea</guid>
@@ -4243,7 +4244,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>16</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>1df53222-cc3e-40a9-99c1-337eea86e2a9</guid>
@@ -4309,7 +4310,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>17</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>ef404636-54c2-490d-bf83-351b579ee5fd</guid>
@@ -4375,7 +4376,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>18</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>23dc9f19-11c0-4d6f-a87c-e2a55ae1afdf</guid>
@@ -4441,7 +4442,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>19</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>925c9e44-2614-412e-b933-12628adecc32</guid>
@@ -4507,7 +4508,7 @@ $xwiki.jsx.use("XWiki.HierarchyMacro")
         <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
       </name>
     </class>
-    <name>XWiki.HierarchyMacro</name>
+    <name>Macros.DynamicHierarchyMacro</name>
     <number>20</number>
     <className>XWiki.WikiMacroParameterClass</className>
     <guid>6ed36028-42d7-4cc2-a902-66ef986fa01e</guid>
