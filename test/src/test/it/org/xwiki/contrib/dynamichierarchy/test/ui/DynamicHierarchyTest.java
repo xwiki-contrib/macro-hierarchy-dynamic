@@ -21,24 +21,23 @@ package org.xwiki.contrib.dynamichierarchy.test.ui;
 
 import java.util.List;
 
-import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.xwiki.test.ui.AbstractTest;
-import org.xwiki.test.ui.SuperAdminAuthenticationRule;
 import org.xwiki.test.ui.po.ViewPage;
 
 import static junit.framework.Assert.assertEquals;
+
+//import org.xwiki.test.ui.SuperAdminAuthenticationRule;
 
 /**
  * UI tests for the Dynamic Hierarchy feature.
  */
 public class DynamicHierarchyTest extends AbstractTest
 {
-    @Rule
-    public SuperAdminAuthenticationRule authenticationRule = new SuperAdminAuthenticationRule(getUtil(), getDriver());
-
+    //@Rule
+    //public SuperAdminAuthenticationRule authenticationRule = new SuperAdminAuthenticationRule(getUtil(), getDriver());
 
     @Test
     public void dynamicHierarchyMacro() throws Exception
@@ -49,34 +48,32 @@ public class DynamicHierarchyTest extends AbstractTest
 
         // Create tree with 3 root documents
         getUtil().createPage(getTestClassName(), "Document1", null, null);
-        getUtil().createPage(getTestClassName(), "Document11", null, null, null , getTestClassName()+".Document1");
-        getUtil().createPage(getTestClassName(), "Document12", null, null, null , getTestClassName()+".Document1");
+        getUtil().createPage(getTestClassName(), "Document11", null, null, null, getTestClassName() + ".Document1");
+        getUtil().createPage(getTestClassName(), "Document12", null, null, null, getTestClassName() + ".Document1");
 
         getUtil().createPage(getTestClassName(), "Document2", null, null);
         getUtil().createPage(getTestClassName(), "Document3", null, null);
 
-        String rootDocuments = getTestClassName()+".Document1,"+getTestClassName()+".Document2,"+getTestClassName()+".Document3";
+        String rootDocuments =
+            getTestClassName() + ".Document1," + getTestClassName() + ".Document2," + getTestClassName() + ".Document3";
 
         // Set Document12 selected on tree
-        String openNode = getTestClassName()+".Document12";
+        String openNode = getTestClassName() + ".Document12";
 
-        String macro = "{{dynamicHierarchy rootdocuments='"+rootDocuments+"' displayvalue='displayTitle' "
-            +"checkChilds='true' openNode='"+openNode+"'/}}";
+        String macro = "{{dynamicHierarchy rootdocuments='" + rootDocuments + "' displayvalue='displayTitle' "
+            + "checkChilds='true' openNode='" + openNode + "'/}}";
 
         ViewPage hierarchyTest = getUtil().createPage(getTestClassName(), "HierarchyTest", macro, "");
 
-        //Waits the display of nodes from loaded data
-        hierarchyTest.waitUntilElementIsVisible(By.className("jstree-container-ul"));
-
+        // Waits the display of nodes from loaded data.
         hierarchyTest.waitUntilElementIsVisible(By.className("jstree-children"));
 
-        // verify number of nodes is 5
+        // Verify number of nodes is 5.
         List<WebElement> elements = getUtil().findElementsWithoutWaiting(getDriver(), By.className("jstree-node"));
         assertEquals(5, elements.size());
 
         // verify that the document selected in tree is "Document12"
-        WebElement element = getUtil().findElementWithoutWaiting(getDriver() ,By.className("jstree-clicked"));
-        assertEquals(element.getAttribute("href"),getUtil().getURL(getTestClassName(), "Document12", "view"));
-
+        WebElement element = getUtil().findElementWithoutWaiting(getDriver(), By.className("jstree-clicked"));
+        assertEquals(element.getAttribute("href"), getUtil().getURL(getTestClassName(), "Document12", "view"));
     }
 }

@@ -43,15 +43,19 @@
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>hierarchy.core.loading=Chargement...
-## translations for the hierarchy macro ##
-hierarchy.updateparent.loading=En déplacement...
-hierarchy.updateparent.success=Document déplacé avec succès:
-hierarchy.updateparent.to=vers le parent
-hierarchy.updateparent.error=Erreur lors du déplacement du document
-hierarchy.updateparent.error.tooltip=Le parent de ce document n'est plus synchronisé correctement. Veuillez recharger la page.
-hierarchy.updateorder.error=Une erreur est survenue lors de la mise à jour de l'ordre des pages enfants de
-hierarchy.updateorder.success=Mise à jour de l'ordre des enfants effectuée pour le document
-hierarchy.updateorder.loading=Sauvegarde de l'ordre en cours...
-hierarchy.updateorder.error.tooltip=L'ordre des enfants de ce document n'est plus synchronisé correctement. Veuillez recharger la page.
-hierarchy.updateparentandorder.error.tooltip=Ce document n'est plus synchronisé. Veuillez recharger la page avant toute autre modification.</content>
+    ## translations for the hierarchy macro ##
+    hierarchy.updateparent.loading=En déplacement...
+    hierarchy.updateparent.success=Document déplacé avec succès:
+    hierarchy.updateparent.to=vers le parent
+    hierarchy.updateparent.error=Erreur lors du déplacement du document
+    hierarchy.updateparent.error.tooltip=Le parent de ce document n'est plus synchronisé correctement. Veuillez
+    recharger la page.
+    hierarchy.updateorder.error=Une erreur est survenue lors de la mise à jour de l'ordre des pages enfants de
+    hierarchy.updateorder.success=Mise à jour de l'ordre des enfants effectuée pour le document
+    hierarchy.updateorder.loading=Sauvegarde de l'ordre en cours...
+    hierarchy.updateorder.error.tooltip=L'ordre des enfants de ce document n'est plus synchronisé correctement. Veuillez
+    recharger la page.
+    hierarchy.updateparentandorder.error.tooltip=Ce document n'est plus synchronisé. Veuillez recharger la page avant
+    toute autre modification.
+  </content>
 </xwikidoc>

@@ -24,7 +24,7 @@
   <web>Macros</web>
   <name>DynamicHierarchyMacroTranslations</name>
   <language/>
-  <defaultLanguage/>
+  <defaultLanguage>en</defaultLanguage>
   <translation>0</translation>
   <parent>Macros.DynamicHierarchyMacro</parent>
   <creator>xwiki:XWiki.Admin</creator>
@@ -61,8 +61,8 @@
         <number>1</number>
         <prettyName>Scope</prettyName>
         <relationalStorage>0</relationalStorage>
-        <separator> </separator>
-        <separators> ,|</separators>
+        <separator></separator>
+        <separators>,|</separators>
         <size>1</size>
         <unmodifiable>0</unmodifiable>
         <values>GLOBAL|WIKI|USER|ON_DEMAND</values>
@@ -78,15 +78,19 @@
     </property>
   </object>
   <content>hierarchy.core.loading=Loading ...
-## translations for the hierarchy macro ##
-hierarchy.updateparent.loading=Moving...
-hierarchy.updateparent.success=Document successfully moved:
-hierarchy.updateparent.to=to parent
-hierarchy.updateparent.error=Error moving document:
-hierarchy.updateparent.error.tooltip=The parent of this document is no longer synchronized. Reload the page to see the actual hierarchy.
-hierarchy.updateorder.error=An error occurred while updating the order of the child documents for
-hierarchy.updateorder.success=Successfully updated the order of the child documents for
-hierarchy.updateorder.loading=Saving the order of the child documents...
-hierarchy.updateorder.error.tooltip=The order of the child documents of this document is no longer synchronized. Reload the page to see the actual hierarchy.
-hierarchy.updateparentandorder.error.tooltip=The parent and order of child documents for this document are no longer synchronized. Reload the page to see the actual hierarchy.</content>
+    ## translations for the hierarchy macro ##
+    hierarchy.updateparent.loading=Moving...
+    hierarchy.updateparent.success=Document successfully moved:
+    hierarchy.updateparent.to=to parent
+    hierarchy.updateparent.error=Error moving document:
+    hierarchy.updateparent.error.tooltip=The parent of this document is no longer synchronized. Reload the page to see
+    the actual hierarchy.
+    hierarchy.updateorder.error=An error occurred while updating the order of the child documents for
+    hierarchy.updateorder.success=Successfully updated the order of the child documents for
+    hierarchy.updateorder.loading=Saving the order of the child documents...
+    hierarchy.updateorder.error.tooltip=The order of the child documents of this document is no longer synchronized.
+    Reload the page to see the actual hierarchy.
+    hierarchy.updateparentandorder.error.tooltip=The parent and order of child documents for this document are no longer
+    synchronized. Reload the page to see the actual hierarchy.
+  </content>
 </xwikidoc>
