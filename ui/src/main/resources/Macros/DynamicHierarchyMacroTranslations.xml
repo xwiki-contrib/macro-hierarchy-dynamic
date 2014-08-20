@@ -83,14 +83,11 @@
     hierarchy.updateparent.success=Document successfully moved:
     hierarchy.updateparent.to=to parent
     hierarchy.updateparent.error=Error moving document:
-    hierarchy.updateparent.error.tooltip=The parent of this document is no longer synchronized. Reload the page to see
-    the actual hierarchy.
+    hierarchy.updateparent.error.tooltip=The parent of this document is no longer synchronized. Reload the page to see the actual hierarchy.
     hierarchy.updateorder.error=An error occurred while updating the order of the child documents for
     hierarchy.updateorder.success=Successfully updated the order of the child documents for
     hierarchy.updateorder.loading=Saving the order of the child documents...
-    hierarchy.updateorder.error.tooltip=The order of the child documents of this document is no longer synchronized.
-    Reload the page to see the actual hierarchy.
-    hierarchy.updateparentandorder.error.tooltip=The parent and order of child documents for this document are no longer
-    synchronized. Reload the page to see the actual hierarchy.
+    hierarchy.updateorder.error.tooltip=The order of the child documents of this document is no longer synchronized. Reload the page to see the actual hierarchy.
+    hierarchy.updateparentandorder.error.tooltip=The parent and order of child documents for this document are no longer synchronized. Reload the page to see the actual hierarchy.
   </content>
 </xwikidoc>

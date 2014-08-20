@@ -42,13 +42,12 @@
       <type>xar</type>
       <scope>runtime</scope>
     </dependency>
-    <!-- Test dependencies -->
     <dependency>
       <groupId>org.xwiki.platform</groupId>
       <artifactId>xwiki-platform-test</artifactId>
       <version>${platform.version}</version>
-      <scope>test</scope>
     </dependency>
+    <!-- Test dependencies -->
     <!-- Make sure we have the Logback SLF4J binding for client side logging for our tests and make sure other logging
          systems go through SLF4J -->
     <dependency>
@@ -68,6 +67,7 @@
     </dependency>
   </dependencies>
   <build>
+    <sourceDirectory>src/main/po</sourceDirectory>
     <testSourceDirectory>src/test/it</testSourceDirectory>
     <plugins>
       <plugin>

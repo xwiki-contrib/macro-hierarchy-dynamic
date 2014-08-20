@@ -19,11 +19,9 @@
  */
 package org.xwiki.contrib.dynamichierarchy.test.ui;
 
-import java.util.List;
-
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.xwiki.contrib.dynamichierarchy.test.ui.po.DynamicHierarchyMacroView;
 import org.xwiki.test.ui.AbstractTest;
 import org.xwiki.test.ui.po.ViewPage;
 
@@ -36,13 +34,9 @@ import static junit.framework.Assert.assertEquals;
  */
 public class DynamicHierarchyTest extends AbstractTest
 {
-    //@Rule
-    //public SuperAdminAuthenticationRule authenticationRule = new SuperAdminAuthenticationRule(getUtil(), getDriver());
-
     @Test
     public void dynamicHierarchyMacro() throws Exception
     {
-
         // Remove existing pages
         getUtil().deleteSpace(getTestClassName());
 
@@ -63,17 +57,15 @@ public class DynamicHierarchyTest extends AbstractTest
         String macro = "{{dynamicHierarchy rootdocuments='" + rootDocuments + "' displayvalue='displayTitle' "
             + "checkChilds='true' openNode='" + openNode + "'/}}";
 
-        ViewPage hierarchyTest = getUtil().createPage(getTestClassName(), "HierarchyTest", macro, "");
+        ViewPage vp = getUtil().createPage(getTestClassName(), "HierarchyTest", macro, "");
 
-        // Waits the display of nodes from loaded data.
-        hierarchyTest.waitUntilElementIsVisible(By.className("jstree-children"));
+        DynamicHierarchyMacroView hierarchyPage = new DynamicHierarchyMacroView(vp);
 
         // Verify number of nodes is 5.
-        List<WebElement> elements = getUtil().findElementsWithoutWaiting(getDriver(), By.className("jstree-node"));
-        assertEquals(5, elements.size());
+        assertEquals(5, hierarchyPage.getNodesCount());
 
         // verify that the document selected in tree is "Document12"
-        WebElement element = getUtil().findElementWithoutWaiting(getDriver(), By.className("jstree-clicked"));
-        assertEquals(element.getAttribute("href"), getUtil().getURL(getTestClassName(), "Document12", "view"));
+        WebElement selectedNode = hierarchyPage.getSelectedNode();
+        assertEquals(selectedNode.getAttribute("href"), getUtil().getURL(getTestClassName(), "Document12", "view"));
     }
 }
