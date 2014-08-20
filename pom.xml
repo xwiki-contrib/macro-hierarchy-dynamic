@@ -22,25 +22,26 @@
  *
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.xwiki.commons</groupId>
     <artifactId>xwiki-commons-pom</artifactId>
-    <version>4.5.3</version>
+    <version>5.4.4</version>
   </parent>
   <groupId>org.xwiki.contrib</groupId>
-  <artifactId>macro-dynamic-tree</artifactId>
-  <name>Dynamic tree macro</name>
+  <artifactId>macro-hierarchy-dynamic</artifactId>
+  <packaging>pom</packaging>
+  <name>Dynamic Hierarchy Macro - Parent POM</name>
   <version>1.0-SNAPSHOT</version>
-  <packaging>xar</packaging>
-  <description>Allow creation of dynamic tree based on jQuery and jsTree</description>
-  <scm>
-    <connection>scm:git:git://github.com/xwiki-contrib/macro-dynamic-tree.git</connection>
-    <developerConnection>scm:git:git@github.com:xwiki-contrib/macro-dynamic-tree.git</developerConnection>
-    <url>https://github.com/xwiki-contrib/macro-dynamic-tree.git</url>
-    <tag>HEAD</tag>
-  </scm>
+  <description>Create dynamic hierarchy trees, using jQuery and jsTree.</description>
+  <properties>
+    <platform.version>${commons.version}</platform.version>
+    <rendering.version>${commons.version}</rendering.version>
+    <!-- Name to display by the Extension Manager -->
+    <xwiki.extension.name>Dynamic Hierarchy Macro</xwiki.extension.name>
+  </properties>
   <developers>
     <developer>
       <id>lbandou</id>
@@ -53,6 +54,12 @@
       <organization>XWiki SAS</organization>
     </developer>
   </developers>
+  <scm>
+    <connection>scm:git:git://github.com/xwiki-contrib/macro-hierarchy-dynamic.git</connection>
+    <developerConnection>scm:git:git@github.com:xwiki-contrib/macro-hierarchy-dynamic.git</developerConnection>
+    <url>https://github.com/xwiki-contrib/macro-hierarchy-dynamic.git</url>
+    <tag>HEAD</tag>
+  </scm>
   <distributionManagement>
     <repository>
       <id>xwiki-staging</id>
@@ -60,31 +67,15 @@
       <url>http://nexus.xwiki.org/nexus/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-release-plugin</artifactId>
-          <!-- Try releasing with release plugin 2.5 so that we can actually release with git 1.9
-               (seems there are a log of bugs, especially http://jira.codehaus.org/browse/MRELEASE-812 ) -->
-          <version>2.5</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-    <extensions>
-      <extension>
-        <groupId>org.xwiki.commons</groupId>
-        <artifactId>xwiki-commons-tool-xar-handlers</artifactId>
-        <version>${project.parent.version}</version>
-      </extension>
-    </extensions>
-    <plugins>
-      <plugin>
-        <groupId>org.xwiki.commons</groupId>
-        <artifactId>xwiki-commons-tool-xar-plugin</artifactId>
-        <version>${project.parent.version}</version>
-      </plugin>
-    </plugins>
-  </build>
+  <modules>
+    <module>ui</module>
+  </modules>
+  <profiles>
+    <profile>
+      <id>integration-tests</id>
+      <modules>
+        <module>test</module>
+      </modules>
+    </profile>
+  </profiles>
 </project>

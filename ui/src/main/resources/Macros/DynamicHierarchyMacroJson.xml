@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
  * See the NOTICE file distributed with this work for additional
  * information regarding copyright ownership.
@@ -20,8 +21,8 @@
 -->
 
 <xwikidoc>
-  <web>XWiki</web>
-  <name>HierarchyMacroJson</name>
+  <web>Macros</web>
+  <name>DynamicHierarchyMacroJson</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
@@ -34,23 +35,23 @@
   <date>1401271593000</date>
   <contentUpdateDate>1401271589000</contentUpdateDate>
   <version>1.1</version>
-  <title>HierarchyMacroJson</title>
+  <title>DynamicHierarchyMacroJson</title>
   <defaultTemplate/>
   <validationScript/>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>false</hidden>
-  <content>{{velocity}}
+  <hidden>true</hidden>
+<content>{{velocity}}
 {{html clean="false" wiki="true"}}
-$response.setContentType("Content-type: application/json")
+$response.setContentType('Content-type: application/json')
 ## Macro to display title
 #macro(getTitleToDisplay $documentSource)
-  #if("$!displayValue" == "displayTitle")
+  #if("$!displayValue" == 'displayTitle')
     #set($titleToDisplay = "$documentSource.displayTitle")
-  #elseif("$!displayValue" == "name")
+  #elseif("$!displayValue" == 'name')
     #set($titleToDisplay = "$documentSource.name")
-  #elseif("$!displayValue" == "title")
+  #elseif("$!displayValue" == 'title')
     #set($titleToDisplay = "$documentSource.title")
   #else
     #set($titleToDisplay = "$documentSource.fullName")
@@ -58,11 +59,10 @@ $response.setContentType("Content-type: application/json")
 #end
 
 #macro(checkHasChild $document)
-
   #if($closeNodeList.contains($document))
     #set($hasChild = 0)
   #else
-    #set($query = $services.query.xwql("select doc.fullName from XWikiDocument doc $!{classFrom} where doc.parent = :parent $!{queryHidden} $!{classFilter} order by doc.name").bindValue("parent", $document).execute())
+    #set($query = $services.query.xwql("select doc.fullName from XWikiDocument doc $!{classFrom} where doc.parent = :parent $!{queryHidden} $!{classFilter} order by doc.name").bindValue('parent', $document).execute())
     #if($checkRight)
       #set($docsCanView = [])
       #foreach($item in $query)
@@ -79,13 +79,13 @@ $response.setContentType("Content-type: application/json")
 
 #macro(getResults $level $queryParam)
   #set($selectFrom = "select doc.fullName from XWikiDocument doc $!{classFrom}")
-  #if($level=="root")
+  #if($level == 'root')
     #set($query = $services.query.xwql("${selectFrom} where ( doc.parent = '' or doc.parent = :parent ) and doc.space = :space and doc.name&lt;&gt;'WebHome' $!{docLanguageWhere} $!{classFilter} $!{excludesWhere} $!{queryHidden} order by doc.name").bindValue("parent", "${queryParam}.WebHome").bindValue("space", "${queryParam}"))
   #else
-    #set($query = $services.query.xwql("${selectFrom} where doc.parent = :parent $!{docLanguageWhere} $!{excludesWhere} $!{classFilter} $!{queryHidden} order by doc.name").bindValue("parent", $queryParam) )
+    #set($query = $services.query.xwql("${selectFrom} where doc.parent = :parent $!{docLanguageWhere} $!{excludesWhere} $!{classFilter} $!{queryHidden} order by doc.name").bindValue('parent', $queryParam) )
   #end
   #if($docLanguage != '')
-    #set($query = $query.bindValue("language", $docLanguage))
+    #set($query = $query.bindValue('language', $docLanguage))
   #end
   #if($excludes != '')
     #foreach($excludeItem in $excludeList)
@@ -99,41 +99,40 @@ $response.setContentType("Content-type: application/json")
 #macro(getChilds $document)
   #getResults("child",$document)
   #if($results.size() &gt; 0 &amp;&amp; !$closeNodeList.contains($document))
-    , 
+    ,
     "state": { "opened" : true },
     "children": [
       #foreach($name in $results)
-        #set($titleToDisplay = "")
+        #set($titleToDisplay = '')
         #set($currDocReference = $services.model.resolveDocument($name))
-        #set($currDoc = $xwiki.getDocument($currDocReference))        
+        #set($currDoc = $xwiki.getDocument($currDocReference))
         #getTitleToDisplay($currDoc)
         #set($urlDoc = "$currDoc.getURL('view')")
         #if($velocityCount &gt; 1) , #end
         {
-          ## "id":"$!{name}", 
           "id": "id$!{currDoc.id}",
-          "text": $jsontool.serialize($!{titleToDisplay}), 
+          "text": $jsontool.serialize($!{titleToDisplay}),
           #if($checkChilds)
             #checkHasChild($name)
             "children": $hasChild,
           #else
-            "children": true, 
-          #end 
+            "children": true,
+          #end
           "data": "${urlDoc}",
           "a_attr" : {"href":"${urlDoc}"}
-          #if($pathToRootNode.contains($name)) 
+          #if($pathToRootNode.contains($name))
           ,
            "state": {
             "opened" : true
-            #if("$name"=="$openNode"), "selected": true #end
-            }          
-            #getChilds($name)             
-          #elseif("$name"=="$openNode")
+            #if("$name" == "$openNode"), "selected": true #end
+            }
+            #getChilds($name)
+          #elseif("$name" == "$openNode")
           ,
            "state": {
             "opened" : true,
             "selected": true
-            }            
+            }
           #end
         }
       #end
@@ -143,36 +142,36 @@ $response.setContentType("Content-type: application/json")
 
 #macro(displayNode $document)
   #if($velocityCount &gt; 1) , #end
-  #set($titleToDisplay = "")
+  #set($titleToDisplay = '')
   #set($currDocReference = $services.model.resolveDocument($document))
   #set($currDoc = $xwiki.getDocument($currDocReference))
   #getTitleToDisplay($currDoc)
   #set($urlDoc = "$currDoc.getURL('view')")
-  
+
   {
-    "id": "id$!{currDoc.id}", 
-    "text": $jsontool.serialize($!{titleToDisplay}), 
+    "id": "id$!{currDoc.id}",
+    "text": $jsontool.serialize($!{titleToDisplay}),
     #if($checkChilds)
       #checkHasChild($document)
       "children": $hasChild,
     #else
-      "children": true, 
-    #end 
+      "children": true,
+    #end
     "data": "${urlDoc}" ,
     "a_attr" : {"href":"${urlDoc}"}
     #if($pathToRootNode.size()&gt; 0 &amp;&amp; $pathToRootNode.contains($document))
-      #getChilds($document)   
-    #elseif("$document"=="$openNode")
+      #getChilds($document)
+    #elseif("$document" == "$openNode")
       ,
        "state": {
         "opened" : true,
         "selected": true
-        }          
+        }
     #end
   }
 #end
 
-#if("$!{request.id}"!="#")
+#if("$!{request.id}" != '#')
   #set($parentId = "$!{request.id}")
   #set($parentId = $parentId.substring(2))
   #set($parentQuery = $services.query.xwql("select doc.fullName from XWikiDocument doc where doc.id = :parentId ").bindValue("parentId", $util.parseLong($parentId)).setLimit(1).execute())
@@ -190,13 +189,13 @@ $response.setContentType("Content-type: application/json")
 #set($xwikiclasses = "$!request.xwikiclass")
 #if($xwikiclasses != '')
   #set($classFilter = " and doc.fullName = obj.name and obj.className = '$xwikiclasses'")
-  #set($classFrom = ", BaseObject as obj")
+  #set($classFrom = ', BaseObject as obj')
 #end
 
 ## the list of documents to show hierarchy for
 #set($rootdocumentsList = [])
 #set($rootdocuments = "$!request.rootdocuments")
-#if($rootdocuments!="")
+#if($rootdocuments != '')
   #set($rootdocumentsListRaw = $rootdocuments.split(','))
   #foreach($rootdocumentElt in $rootdocumentsListRaw)
     #set($rootdocumentElt = $rootdocumentElt.trim())
@@ -206,12 +205,12 @@ $response.setContentType("Content-type: application/json")
   #end
 #end
 
-#if( $rootdocumentsList.size() &gt; 0 &amp;&amp; $space=="")
+#if($rootdocumentsList.size() &gt; 0 &amp;&amp; $space == '')
   #set($mode = "documents")
-#elseif($rootdocumentsList.size() == 0 &amp;&amp; $space!="")
-  #set($mode = "space")
+#elseif($rootdocumentsList.size() == 0 &amp;&amp; $space != '')
+  #set($mode = 'space')
 #else
-  #set($mode = "mixte")
+  #set($mode = 'mixte')
 #end
 
 ## get the node value (a document's full name) for which we want to display the path expanded from the root node to the specified node
@@ -221,7 +220,7 @@ $response.setContentType("Content-type: application/json")
 #set($closeNode = "$!request.closeNode")
 
 #set($closeNodeList = [])
-#if("$!closeNode" != "")
+#if("$!closeNode" != '')
   #set($closeNodeList = $closeNode.split(","))
 #end
 
@@ -230,7 +229,7 @@ $response.setContentType("Content-type: application/json")
 
 ## whether rights should be checked when displaying the documents
 #set($checkRight = false)
-#if("$!request.checkright" == "true" || "$!request.checkright" == "yes")
+#if("$!request.checkright" == 'true' || "$!request.checkright" == 'yes')
   #set($checkRight = true)
 #end
 
@@ -243,8 +242,8 @@ $response.setContentType("Content-type: application/json")
 #end
 ## the list of documents to exclude, if any
 #set($excludes = "$!request.excludes")
-#set($excludesWhere = "")
-#if($excludes != "")
+#set($excludesWhere = '')
+#if($excludes != '')
   #set($excludesWhere = ' and doc.fullName not in ( :excludes )')
 #end
 
@@ -264,7 +263,7 @@ $response.setContentType("Content-type: application/json")
   #set($excludesWhere = " and doc.fullName not in (")
   #foreach($excluded in $excludeList)
     #if($velocityCount &gt; 1)
-      #set($excludesWhere = $excludesWhere + ', ') 
+      #set($excludesWhere = $excludesWhere + ', ')
     #end
     #set($excludesWhere = $excludesWhere + " :exclude${velocityCount} ")
   #end
@@ -273,7 +272,7 @@ $response.setContentType("Content-type: application/json")
 
 
 #set($docLanguage = "$!request.documentLanguage")
-#set($docLanguageWhere = "")
+#set($docLanguageWhere = '')
 #if($docLanguage != '')
   #if($docLanguage == $xwiki.getXWikiPreference('default_language'))
     #set($docLanguageWhere = "and (doc.language = :language OR doc.language='') ")
@@ -289,7 +288,7 @@ $response.setContentType("Content-type: application/json")
 
 ## check showHidden
 #if($showHidden)
-  #set($queryHidden = "")
+  #set($queryHidden = '')
 #else
   #set($queryHidden = " and doc.hidden&lt;&gt;'1' ")
 #end
@@ -299,37 +298,36 @@ $response.setContentType("Content-type: application/json")
 
 ## we need to recursively get all the ancestors of the specified node @$openNode
 #set($pathToRootNode = [])
-## #set($childsJson ="")
 
 #if(!$openNode.isEmpty() &amp;&amp; $xwiki.exists($openNode))
   #macro(getPathToRoot $document)
     #set($documentParent = $document.getParent())
     #if(!$checkRight || $xwiki.hasAccessLevel('view', $xcontext.user, $documentParent))
       #if(!$documentParent.equals(''))
-        #set($discard = $pathToRootNode.add($documentParent))   
+        #set($discard = $pathToRootNode.add($documentParent))
         #getPathToRoot($xwiki.getDocument($documentParent))
       #end
     #elseif(!$xwiki.hasAccessLevel('view', $xcontext.user, $documentParent))
-      ## if current user don't have access level to view one of parent  don't display openNode 
+      ## if current user don't have access level to view one of parent  don't display openNode
       #set($pathToRootNode = [])
     #end
   #end
   #if( !$checkRight || $xwiki.hasAccessLevel('view', $xcontext.user, $openNode) )
     #getPathToRoot($xwiki.getDocument($openNode))
   #else
-    #set($openNode = "" )
+    #set($openNode = '' )
   #end
-  
+
 #end
 
 [
-#if($parent=="#" &amp;&amp; $mode=="documents")
+#if($parent == '#' &amp;&amp; $mode == 'documents')
   #foreach($root in $rootdocumentsList)
     #if( !$checkRight || $xwiki.hasAccessLevel('view', $xcontext.user, $root) )
       #displayNode($root)
-    #end  
+    #end
   #end
-#elseif($parent=="#" &amp;&amp; $mode=="space")
+#elseif($parent == '#' &amp;&amp; $mode=='space')
   #getResults("root", $space)
   #set($titleToDisplay = "")
   #set($currDocReference = $services.model.resolveDocument("${space}.WebHome"))
@@ -338,8 +336,8 @@ $response.setContentType("Content-type: application/json")
   #set($urlDoc = "$currDoc.getURL('view')")
   {
     "id": "id$!{currDoc.id}",
-    "text": "$!{titleToDisplay}", 
-    "children": true, 
+    "text": "$!{titleToDisplay}",
+    "children": true,
     "data": "$!{urlDoc}" ,
     "a_attr" : {"href":"${urlDoc}"},
     "state": { "opened" : $opened },
