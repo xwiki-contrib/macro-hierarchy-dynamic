@@ -27,8 +27,6 @@ import org.xwiki.test.ui.po.ViewPage;
 
 import static junit.framework.Assert.assertEquals;
 
-//import org.xwiki.test.ui.SuperAdminAuthenticationRule;
-
 /**
  * UI tests for the Dynamic Hierarchy feature.
  */
@@ -59,13 +57,13 @@ public class DynamicHierarchyTest extends AbstractTest
 
         ViewPage vp = getUtil().createPage(getTestClassName(), "HierarchyTest", macro, "");
 
-        DynamicHierarchyMacroView hierarchyPage = new DynamicHierarchyMacroView(vp);
+        DynamicHierarchyMacroView hierarchyMacroView = new DynamicHierarchyMacroView(vp);
 
         // Verify number of nodes is 5.
-        assertEquals(5, hierarchyPage.getNodesCount());
+        assertEquals(5, hierarchyMacroView.getNodesCount());
 
         // verify that the document selected in tree is "Document12"
-        WebElement selectedNode = hierarchyPage.getSelectedNode();
+        WebElement selectedNode = hierarchyMacroView.getSelectedNode();
         assertEquals(selectedNode.getAttribute("href"), getUtil().getURL(getTestClassName(), "Document12", "view"));
     }
 }

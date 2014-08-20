@@ -26,7 +26,7 @@ import org.openqa.selenium.WebElement;
 import org.xwiki.test.ui.po.ViewPage;
 
 /**
- * Represents the Dynamic Hierarchy view page.
+ * Represents the actions that can be done on the rendered Dynamic Hierarchy Macro.
  */
 public class DynamicHierarchyMacroView extends ViewPage
 {
